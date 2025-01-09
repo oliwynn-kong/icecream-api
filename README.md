@@ -59,6 +59,24 @@ docker-compose up --scale app=3
 ```
 This will run 3 instances of the API, accessible at ports 3000, 3001, and 3002.
 
+### **4. Deploy with deploy_icecream_api.sh**
+You can use the `deploy_icecream_api.sh` script to deploy a specific number of containers.
+```bash
+./deploy_icecream_api.sh <number_of_containers>
+```
+Replace `<number_of_containers>` with the number of containers you want to deploy (between 1 and 10).
+
+### **5. Remove containers with remove_icecream_api.sh**
+You can use the `remove_icecream_api.sh` script to remove a specific number of containers or all containers.
+```bash
+# Remove a specific number of containers
+./remove_icecream_api.sh <number_of_containers>
+
+# Remove all containers
+./remove_icecream_api.sh --all
+```
+Replace `<number_of_containers>` with the number of containers you want to remove.
+
 #
 
 ## API Endpoints
