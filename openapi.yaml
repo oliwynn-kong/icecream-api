@@ -1,0 +1,191 @@
+openapi: 3.0.1
+info:
+  title: Ice Cream API
+  description: An API to manage ice cream flavors and orders.
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000
+    description: Local server
+
+paths:
+  /flavors:
+    get:
+      summary: Get all ice cream flavors
+      responses:
+        200:
+          description: A list of all flavors
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Flavor'
+    post:
+      summary: Add a new ice cream flavor
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FlavorInput'
+      responses:
+        201:
+          description: Flavor successfully added
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Flavor'
+
+  /flavors/{id}:
+    get:
+      summary: Get a specific flavor by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: The ID of the flavor
+      responses:
+        200:
+          description: Flavor details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Flavor'
+        404:
+          description: Flavor not found
+    put:
+      summary: Update a flavor
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: The ID of the flavor
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FlavorInput'
+      responses:
+        200:
+          description: Flavor successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Flavor'
+        404:
+          description: Flavor not found
+    delete:
+      summary: Delete a flavor
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: The ID of the flavor
+      responses:
+        200:
+          description: Flavor successfully deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Flavor'
+        404:
+          description: Flavor not found
+
+  /orders:
+    get:
+      summary: Get all orders
+      responses:
+        200:
+          description: A list of all orders
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Order'
+    post:
+      summary: Place an order
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderInput'
+      responses:
+        201:
+          description: Order successfully placed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+
+components:
+  schemas:
+    Flavor:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The unique ID of the flavor
+        name:
+          type: string
+          description: The name of the flavor
+        stock:
+          type: integer
+          description: The stock available for this flavor
+      required:
+        - id
+        - name
+        - stock
+    FlavorInput:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the flavor
+        stock:
+          type: integer
+          description: The stock available for this flavor
+      required:
+        - name
+        - stock
+    Order:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The unique ID of the order
+        flavorId:
+          type: integer
+          description: The ID of the ordered flavor
+        quantity:
+          type: integer
+          description: The quantity ordered
+        date:
+          type: string
+          format: date-time
+          description: The date the order was placed
+      required:
+        - id
+        - flavorId
+        - quantity
+        - date
+    OrderInput:
+      type: object
+      properties:
+        flavorId:
+          type: integer
+          description: The ID of the flavor being ordered
+        quantity:
+          type: integer
+          description: The quantity of the flavor being ordered
+      required:
+        - flavorId
+        - quantity

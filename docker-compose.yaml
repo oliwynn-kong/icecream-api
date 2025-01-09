@@ -1,0 +1,16 @@
+version: "3.9"
+
+services:
+  app:
+    build:
+      context: .  # Path to the directory containing the Dockerfile
+      dockerfile: Dockerfile  # Optional if your file is named Dockerfile
+    image: icecream-api  # Name and tag for the image
+    ports:
+      - "3000-3010:3000"  # Map port 3000-3010 on host to 3000 in container
+    volumes:
+      - .:/app  # Optional: Mount local directory to container for live updates
+      - /app/node_modules  # Avoid overwriting node_modules in the container
+    environment:
+      - NODE_ENV=development  # Example: set environment variables
+    command: ["node", "server.js"]  # Optional: override CMD in Dockerfile
