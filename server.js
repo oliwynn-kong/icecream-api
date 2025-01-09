@@ -15,11 +15,18 @@ let flavors = [
 ];
 let orders = [];
 
+
+const os = require('os');
+// Get the hostname of the server
+const hostname = os.hostname();
+
+
 // Routes
 
 // Get all flavors
 app.get("/flavors", (req, res) => {
   res.json(flavors);
+  console.log(`the hostname is: ${hostname}`);
 });
 
 // Get a flavor by ID
@@ -27,6 +34,7 @@ app.get("/flavors/:id", (req, res) => {
   const flavor = flavors.find((f) => f.id === parseInt(req.params.id));
   if (!flavor) return res.status(404).send("Flavor not found.");
   res.json(flavor);
+  console.log(`the hostname is: ${hostname}`);
 });
 
 // Add a new flavor
@@ -35,6 +43,7 @@ app.post("/flavors", (req, res) => {
   const newFlavor = { id: flavors.length + 1, name, stock };
   flavors.push(newFlavor);
   res.status(201).json(newFlavor);
+  console.log(`the hostname is: ${hostname}`);
 });
 
 // Update a flavor
@@ -47,6 +56,7 @@ app.put("/flavors/:id", (req, res) => {
   if (stock !== undefined) flavor.stock = stock;
 
   res.json(flavor);
+  console.log(`the hostname is: ${hostname}`);
 });
 
 // Delete a flavor
@@ -76,11 +86,13 @@ app.post("/orders", (req, res) => {
   };
   orders.push(order);
   res.status(201).json(order);
+  console.log(`the hostname is: ${hostname}`);
 });
 
 // Get all orders
 app.get("/orders", (req, res) => {
   res.json(orders);
+  console.log(`the hostname is: ${hostname}`);
 });
 
 // Server setup

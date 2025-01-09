@@ -89,11 +89,11 @@ http://localhost:3000
 
 | Method | Endpoint          | Description               |
 |--------|--------------------|---------------------------|
-| GET    | `/icecreams`       | List all ice cream flavors |
-| POST   | `/icecreams`       | Add a new flavor          |
-| GET    | `/icecreams/:id`   | Get details of a flavor   |
-| PUT    | `/icecreams/:id`   | Update a flavor           |
-| DELETE | `/icecreams/:id`   | Delete a flavor           |
+| GET    | `/flavors`       | List all ice cream flavors |
+| POST   | `/flavors`       | Add a new flavor          |
+| GET    | `/flavors/:id`   | Get details of a flavor   |
+| PUT    | `/flavors/:id`   | Update a flavor           |
+| DELETE | `/flavors/:id`   | Delete a flavor           |
 
 #
 
