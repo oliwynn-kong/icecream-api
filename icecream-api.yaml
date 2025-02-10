@@ -20,8 +20,7 @@ spec:
     spec:
       containers:
         - name: icecream-api
-          image: icecream-api:latest
-          imagePullPolicy: IfNotPresent
+          image: olikong/icecream-api:latest
           ports:
             - containerPort: 8080  # Change this if your API runs on a different port
           env:
