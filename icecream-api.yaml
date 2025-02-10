@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: apps
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: icecream-api
+  namespace: apps
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: icecream-api
+  template:
+    metadata:
+      labels:
+        app: icecream-api
+    spec:
+      containers:
+        - name: icecream-api
+          image: icecream-api:latest
+          ports:
+            - containerPort: 8080  # Change this if your API runs on a different port
+          env:
+            - name: ENVIRONMENT
+              value: "production"  # Adjust as needed
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: icecream-api
+  namespace: apps
+  labels:
+    app: icecream-api
+spec:
+  selector:
+    app: icecream-api
+  ports:
+    - protocol: TCP
+      port: 80  # External port within the cluster
+      targetPort: 8080  # Must match the containerPort in the Deployment
